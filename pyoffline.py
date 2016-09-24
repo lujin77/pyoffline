@@ -2,6 +2,8 @@ import json
 import os
 import subprocess
 
+import pip
+
 
 def _exec_command(command_list):
     """
@@ -66,9 +68,9 @@ def download_package(package_name):
         os.mkdir(subdir)
 
     # Download package.
-    command = ["pip", "download", "-d", subdir,
+    command = ["download", "-d", subdir,
                "-i", pypi_src, package_name]
-    _exec_command(command)
+    pip.main(command)
 
     return
 
