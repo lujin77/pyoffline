@@ -90,4 +90,5 @@ ENV/
 
 # Download dir.
 py_versions/
+py_packages/
 
