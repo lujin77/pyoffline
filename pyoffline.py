@@ -3,17 +3,9 @@ import os
 import subprocess
 
 
-# Directory contains python interpreter.
-_pydir = "py_versions"
-
-# Cpython mirror url.
-_pyurl = "http://mirrors.sohu.com/python"
-#_pyurl = "https://www.python.org/ftp/python"
-
-
 def _exec_command(command_list):
     """
-    Helper function to execute shell command.
+    Execute shell command with instant output on stdout.
     """
     p = subprocess.Popen(command_list, stdout=subprocess.PIPE)
     stdout, stderr = p.communicate()
@@ -28,13 +20,20 @@ def download_cpython(version):
     version: version number of CPython, str.
 
     """
-    if not os.path.exists(_pydir):
-        os.mkdir(_pydir)
+    # Directory contains python interpreter.
+    pydir = "py_versions"
+
+    # Cpython mirror url.
+    pyurl = "http://mirrors.sohu.com/python"
+    #_pyurl = "https://www.python.org/ftp/python"
+
+    if not os.path.exists(pydir):
+        os.mkdir(pydir)
 
     # Download CPython tarball.
     url_template = "{}/{}/Python-{}.tgz"
-    download_url = url_template.format(_pyurl, version, version)
-    tarname = "{}/Python-{}.tar.gz".format(_pydir, version)
+    download_url = url_template.format(pyurl, version, version)
+    tarname = "{}/Python-{}.tar.gz".format(pydir, version)
 
     command = ["wget", "-c", download_url, "-O", tarname]
     _exec_command(command)
@@ -51,8 +50,30 @@ def download_package(package_name):
     packages_name: name of python package, str. e.g. "ipython==2.2.0"
 
     """
+    # Name of packages directory.
+    packdir = "py_packages"
+
+    # PyPI source url.
+    pypi_src = "http://pypi.douban.com/simple"
+
+    # Create top packages directories.
+    if not os.path.exists(packdir):
+        os.mkdir(packdir)
+
+    # Create sub directories.
+    subdir = "{}/{}".format(packdir, package_name)
+    if not os.path.exists(subdir):
+        os.mkdir(subdir)
+
+    # Download package.
+    command = ["pip", "download", "-d", subdir,
+               "-i", pypi_src, package_name]
+    _exec_command(command)
+
+    return
 
 
 if "__main__" == __name__:
-    download_cpython("2.7.12")
+    download_package("vaspy")
+    #download_cpython("2.7.12")
 
