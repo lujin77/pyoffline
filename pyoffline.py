@@ -58,20 +58,22 @@ def download_cpython(version):
     return
 
 
-def download_package(package_name, py_version):
+def download_package(package_name):
     """
     Download python package and its dependencies.
 
     Parameters:
     -----------
     packages_name: name of python package, str. e.g. "ipython==2.2.0"
-    py_version: version of python interpreter, str. e.g. "3.5.2"
     """
     # Name of packages directory.
     packdir = "py_packages"
 
     # PyPI source url.
     pypi_src = "http://pypi.douban.com/simple"
+
+    # Python version.
+    py_version = get_pyversion()
 
     # Create top packages directory.
     if not os.path.exists(packdir):
@@ -97,10 +99,9 @@ def download_package(package_name, py_version):
 
 if "__main__" == __name__:
     # Read configuration file.
-#    with open("config.json", "r") as f:
-#        config = json.load(f)
-#
-#    py_versions = config["py_versions"]
-#    py_packages = config["py_packages"]
-     download_package('vaspy', '2.7.12')
+    with open("config.json", "r") as f:
+        config = json.load(f)
+
+    py_versions = config["py_versions"]
+    py_packages = config["py_packages"]
 
