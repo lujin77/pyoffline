@@ -7,17 +7,18 @@ download_pyenv()
     local git_ssh="https://github.com/yyuu/pyenv.git"
     local pyenv_dir="./pyenv"
 
-    if [ ! -d "${pyenv_dir}" ]; then
-        mkdir ${pyenv_dir}
+    # Remove old pyenv.
+    if [ -d "${pyenv_dir}" ]; then
+        rm -rf ${pyenv_dir}
     fi
 
     # Clone pyenv repository.
     git clone ${git_ssh} ${pyenv_dir}
 
     # Create cache.
-    echo "Create ${pyenv_dir}/cache..."
-    mkdir "${pyenv_dir}/cache"
+    if [ ! -d "${pyenv_dir}/cache" ]; then
+        echo "Create ${pyenv_dir}/cache..."
+        mkdir "${pyenv_dir}/cache"
+    fi
 }
-
-download_pyenv
 
