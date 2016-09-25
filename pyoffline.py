@@ -1,9 +1,20 @@
+import logging
 import json
 import os
 import subprocess
 import sys
 
 import pip
+
+
+# Initialize logger.
+_logger = logging.getLogger("vaspy")
+_logger.setLevel(logging.INFO)
+_console_hdlr = logging.StreamHandler()
+_console_hdlr.setLevel(logging.INFO)
+_formatter = logging.Formatter("%(name)s   %(levelname)-8s %(message)s")
+_console_hdlr.setFormatter(_formatter)
+_logger.addHandler(_console_hdlr)
 
 
 def _exec_command(command_list):
@@ -104,4 +115,9 @@ if "__main__" == __name__:
 
     py_versions = config["py_versions"]
     py_packages = config["py_packages"]
+
+    # Download pythons.
+    for py_version in py_versions:
+        _logger.info("Downloading Python-{}".format(py_version))
+        download_cpython(py_version)
 
