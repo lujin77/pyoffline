@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+[ -n $PYOFFLINE_DEBUG ] && set -x
 
 download_pyenv()
 {
@@ -15,7 +16,7 @@ download_pyenv()
     # Clone pyenv repository.
     git clone ${git_ssh} ${pyenv_dir}
 
-    # Create cache.
+    # Create cache directory.
     if [ ! -d "${pyenv_dir}/cache" ]; then
         echo "Create ${pyenv_dir}/cache..."
         mkdir "${pyenv_dir}/cache"
