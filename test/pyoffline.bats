@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-. ../libexec/pyoffline
+source ../libexec/pyoffline
 
 @test "Test pyenv downloading." {
     download_pyenv
