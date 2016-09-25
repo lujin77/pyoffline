@@ -3,7 +3,7 @@
 
     "py_packages": {
         "2.7.12": ["ipython==2.2.0", "numpy"],
-        "3.5.2": ["ipython==2.2.0", "numpy"]
+        "3.5.2": ["vaspy"]
     }
 }
 
