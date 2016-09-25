@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import logging
 import json
 import os
@@ -41,7 +43,7 @@ def get_pyversion():
 
 def download_cpython(version):
     """
-    Download python interpretors from https://python.org.
+    Download python interpretors from sohu mirror'.
 
     Parameters:
     -----------
@@ -120,4 +122,13 @@ if "__main__" == __name__:
     for py_version in py_versions:
         _logger.info("Downloading Python-{}".format(py_version))
         download_cpython(py_version)
+
+    # Download packages.
+    py_version = get_pyversion()
+    if py_version not in py_packages:
+        raise ValueError("Python-{} not found in config.json.")
+    packages = py_packages[py_version]
+    for package in packages:
+        _logger.info("Downloading {} for Python-{}...".format(package, py_version))
+        download_package(package)
 
