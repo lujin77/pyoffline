@@ -2,14 +2,14 @@
 
 source ../libexec/pyoffline-clone
 
-@test "Test pyenv downloading." {
+@test "Test pyenv download." {
     download_pyenv
     [ -d pyenv ]
     [ -d pyenv/cache ]
     rm -rf ./pyenv
 }
 
-@test "Test interpreter downloading." {
+@test "Test interpreter download." {
     local pyscript="../libexec/download_python.py"
     python ${pyscript}
     [ -d py_versions ]
