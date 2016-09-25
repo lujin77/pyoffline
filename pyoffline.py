@@ -1,6 +1,7 @@
 import json
 import os
 import subprocess
+import sys
 
 import pip
 
@@ -11,6 +12,20 @@ def _exec_command(command_list):
     """
     p = subprocess.Popen(command_list, stdout=subprocess.PIPE)
     stdout, stderr = p.communicate()
+
+
+def get_pyversion():
+    """
+    Get current python interpreter version.
+
+    Returns:
+    --------
+    version of python, str. e.g. "2.7.12"
+    """
+    info = sys.version_info
+    version = "{}.{}.{}".format(info.major, info.minor, info.micro)
+
+    return version
 
 
 def download_cpython(version):
