@@ -10,13 +10,13 @@ import pip
 
 
 # Initialize logger.
-_logger = logging.getLogger("vaspy")
-_logger.setLevel(logging.INFO)
+logger = logging.getLogger("pyoffline")
+logger.setLevel(logging.INFO)
 _console_hdlr = logging.StreamHandler()
 _console_hdlr.setLevel(logging.INFO)
 _formatter = logging.Formatter("%(name)s   %(levelname)-8s %(message)s")
 _console_hdlr.setFormatter(_formatter)
-_logger.addHandler(_console_hdlr)
+logger.addHandler(_console_hdlr)
 
 
 def _exec_command(command_list):
@@ -120,7 +120,7 @@ if "__main__" == __name__:
 
     # Download pythons.
     for py_version in py_versions:
-        _logger.info("Downloading Python-{}".format(py_version))
+        logger.info("Downloading Python-{}".format(py_version))
         download_cpython(py_version)
 
     # Download packages.
@@ -129,6 +129,6 @@ if "__main__" == __name__:
         raise ValueError("Python-{} not found in config.json.")
     packages = py_packages[py_version]
     for package in packages:
-        _logger.info("Downloading {} for Python-{}...".format(package, py_version))
+        logger.info("Downloading {} for Python-{}...".format(package, py_version))
         download_package(package)
 
