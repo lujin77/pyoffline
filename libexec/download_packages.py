@@ -19,3 +19,6 @@ if "__main__" == __name__:
         logger.info("Downloading {} for Python-{}...".format(package, py_version))
         download_package(package)
 
+    # Download virtualenv.
+    download_package("virtualenv")
+
