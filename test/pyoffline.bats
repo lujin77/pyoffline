@@ -18,3 +18,14 @@ source ../libexec/pyoffline-clone
     rm -rf ./py_versions
 }
 
+@test "Test python packages download." {
+    local pyscript="../libexec/download_packages.py"
+    local pyv=$(python -c 'import platform; print(platform.python_version())')
+    python ${pyscript}
+    [ -d py_packages ]
+    [ -d "py_packages/${pyv}" ]
+    n=$(ls "py_packages/${pyv}" | wc -l)
+    [ "$n" -ne 0 ]
+    rm -rf ./py_packages
+}
+
