@@ -93,3 +93,6 @@ py_versions/
 py_packages/
 pyenv/
 
+# gvim temp files.
+*.swp
+
