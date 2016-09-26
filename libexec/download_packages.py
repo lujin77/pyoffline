@@ -2,6 +2,8 @@
 
 from pyoffline import *
 
+essential_requires = ["virtualenv", "ipython"]
+
 if "__main__" == __name__:
     # Open config file.
     with open("config.json", "r") as f:
@@ -20,5 +22,18 @@ if "__main__" == __name__:
         download_package(package)
 
     # Download virtualenv.
-    download_package("virtualenv")
+    for essential_require in essential_requires:
+
+        # Ignore same downloaded packages.
+        ignore = False
+        for downloaded in packages:
+            if downloaded.startswith(essential_require):
+                ignore = True
+                break
+        if ignore:
+            msg = "Ignore {}, {} has been downloaded before"
+            logger.warning(msg.format(essential_require, downloaded))
+            continue
+
+        download_package(package)
 
