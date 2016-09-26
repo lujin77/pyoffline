@@ -109,26 +109,3 @@ def download_package(package_name):
 
     return
 
-
-if "__main__" == __name__:
-    # Read configuration file.
-    with open("config.json", "r") as f:
-        config = json.load(f)
-
-    py_versions = config["py_versions"]
-    py_packages = config["py_packages"]
-
-    # Download pythons.
-    for py_version in py_versions:
-        logger.info("Downloading Python-{}".format(py_version))
-        download_cpython(py_version)
-
-    # Download packages.
-    py_version = get_pyversion()
-    if py_version not in py_packages:
-        raise ValueError("Python-{} not found in config.json.")
-    packages = py_packages[py_version]
-    for package in packages:
-        logger.info("Downloading {} for Python-{}...".format(package, py_version))
-        download_package(package)
-
