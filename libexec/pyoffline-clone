@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 set -e
+[ -n "$PYOFFLINE_DEBUG" ] && set -x
 
 download_pyenv()
 {
@@ -21,4 +22,33 @@ download_pyenv()
         mkdir "${pyenv_dir}/cache"
     fi
 }
+
+RUNNING="$(basename $0)"
+
+if [ "$RUNNING" = "pyoffline-clone" ]; then
+    exec_dir=$(dirname "$0")
+
+    # Clone pyenv.
+    download_pyenv
+    python "${exec_dir}/download_python.py"
+    mv py_versions/* pyenv/cache
+    rm -r py_versions
+    wget -c https://bootstrap.pypa.io/get-pip.py -O pyenv/cache/get-pip.py
+
+    # Download packages for all python versions
+    py_versions=$(python "${exec_dir}/py_versions.py")
+    for py_version in ${py_versions}
+    do
+        py="${HOME}/.pyenv/versions/${py_version}/bin/python"
+        ${py} ${exec_dir}/download_packages.py
+    done
+
+    # Package clone.
+    echo "pyoffline INFO    Packaging the clone environment..."
+    mkdir pyoffline-clone
+    mv pyenv py_packages pyoffline-clone
+    tar zcvf pyoffline-clone.tgz pyoffline-clone
+    rm -rf pyenv py_packages
+    echo "pyoffline INFO    Successfully cloned the environment"
+fi
 
