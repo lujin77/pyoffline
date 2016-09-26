@@ -9,7 +9,7 @@ source ../libexec/pyoffline-clone
     rm -rf ./pyenv
 }
 
-@test "Test interpreter download." {
+@test "Test python download." {
     local pyscript="../libexec/download_python.py"
     python ${pyscript}
     [ -d py_versions ]

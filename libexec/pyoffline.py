@@ -97,13 +97,8 @@ def download_package(package_name):
     if not os.path.exists(pydir):
         os.mkdir(pydir)
 
-    # Create sub directories.
-    subdir = "{}/{}".format(pydir, package_name)
-    if not os.path.exists(subdir):
-        os.mkdir(subdir)
-
     # Download package.
-    command = ["download", "-d", subdir,
+    command = ["download", "-d", pydir,
                "-i", pypi_src, package_name]
     pip.main(command)
 
