@@ -48,7 +48,7 @@ if [ "$RUNNING" = "pyoffline-clone" ]; then
     mkdir pyoffline-clone
     mv pyenv py_packages pyoffline-clone
     tar zcvf pyoffline-clone.tgz pyoffline-clone
-    rm -rf pyenv py_packages
+    rm -rf pyenv py_packages pyoffline-clone
     echo "pyoffline INFO    Successfully cloned the environment"
 fi
 
