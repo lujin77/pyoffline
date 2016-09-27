@@ -36,7 +36,7 @@ if [ "$RUNNING" = "pyoffline-clone" ]; then
     wget -c https://bootstrap.pypa.io/get-pip.py -O pyenv/cache/get-pip.py
 
     # Download packages for all python versions
-    py_versions=$(python "${exec_dir}/py_versions.py")
+    py_versions=$(python "${exec_dir}/config_info.py" -p py_versions)
     for py_version in ${py_versions}
     do
         py="${HOME}/.pyenv/versions/${py_version}/bin/python"

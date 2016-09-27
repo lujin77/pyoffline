@@ -2,7 +2,6 @@
 
 from pyoffline import *
 
-essential_requires = ["virtualenv", "ipython"]
 
 if "__main__" == __name__:
     # Open config file.
@@ -10,6 +9,7 @@ if "__main__" == __name__:
         config = json.load(f)
 
     py_packages = config["py_packages"]
+    essential_packages = config["essential_packages"]
 
     # Download packages.
     py_version = get_pyversion()
@@ -22,7 +22,7 @@ if "__main__" == __name__:
         download_package(package)
 
     # Download virtualenv.
-    for essential_require in essential_requires:
+    for essential_require in essential_packages:
 
         # Ignore same downloaded packages.
         ignore = False
