@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$PYOFFLINE_DEBUG" ] && set -x
+
+install_pyenv()
+{
+    if [ -z "$PYENV_ROOT" ]; then
+        tar zxvf pyenv.tar.gz
+    fi
+}
+
