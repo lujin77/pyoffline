@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import argparse
+import sys
 
 from pyoffline import *
 
@@ -25,6 +26,6 @@ if "__main__" == __name__:
             print(p)
 
     else:
-        msg = "Unknown config parameter: {}".format(arg.parameter)
-        raise ValueError(msg)
+        msg = "Unknown config parameter: {}".format(args.parameter)
+        sys.exit(msg)
 
