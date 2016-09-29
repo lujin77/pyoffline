@@ -63,10 +63,12 @@ def download_cpython(version):
     # Download CPython tarball.
     url_template = "{}/{}/Python-{}.tgz"
     download_url = url_template.format(pyurl, version, version)
-    tarname = "{}/Python-{}.tar.gz".format(pydir, version)
+    tarnames = ["{}/Python-{}.tar.gz".format(pydir, version),
+                "{}/Python-{}.tar.xz".format(pydir, version)]
 
-    command = ["wget", "-c", download_url, "-O", tarname]
-    _exec_command(command)
+    for tarname in tarnames:
+        command = ["wget", "-c", download_url, "-O", tarname]
+        _exec_command(command)
 
     return
 
